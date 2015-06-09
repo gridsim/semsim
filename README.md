@@ -14,25 +14,25 @@ Table of Contents
 
 1. Synopsis
 ===
-SimSem is a building simulator developed for the SEMIAH (http://semiah.eu) 
+SemSim is a building simulator developed for the SEMIAH (http://semiah.eu) 
 european project. 
 
 
 2. Latest Version
 ===
-You can find the latest version of SimSem on :
+You can find the latest version of SemSim on :
     https://github.com/gridsim/
 
 
 3. Installation
 ===
-SimSem is a full python project thus as long as Python is installed on your
+SemSim is a full python project thus as long as Python is installed on your
 system you can install it by moving in the root folder (the folder this README
 file should be) and run :
     python setup.py install
 In some systems you need Administrator right to run this command.
 
-Warning : SimSem requires these packages to be used in full :
+Warning : SemSim requires these packages to be used in full :
 
  * gridsim
  * influxdb
@@ -53,7 +53,7 @@ github at the following address :
 6. Contributors
 ===
 
-The SimSem Team is currently composed of :
+The SemSim Team is currently composed of :
 
  * Dominique Gabioud (dominique.gabioud@hevs.ch)
  * Gillian Basso (gillian.basso@hevs.ch)
@@ -80,12 +80,12 @@ Copyright (C) 2011-2014 The Gridsim Team
 
 This file is part of the Gridsim project.
 
-the SimSem project is free software; you can redistribute it and/or modify it
+the SemSim project is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
 Software Foundation; either version 3 of the License, or (at your option) any
 later version.
 
-the SimSem project is distributed in the hope that it will be useful, but
+the SemSim project is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
