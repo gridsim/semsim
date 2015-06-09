@@ -87,7 +87,7 @@ If not, see <http://www.gnu.org/licenses/>.
 
 10. Copyright
 ===
-Copyright (C) 2011-2014 The Gridsim Team
+Copyright (C) 2011-2015 The Gridsim Team
 
 This file is part of the Gridsim project.
 
