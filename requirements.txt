@@ -1,0 +1,4 @@
+--index-url https://pypi.python.org/simple/
+
+gridsim>=0.1.1rc2
+influxdb>=1.0
