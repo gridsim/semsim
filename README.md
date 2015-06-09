@@ -4,12 +4,13 @@ Table of Contents
  1. Synopsis
  2. Latest Version
  3. Installation
- 4. Documentation
- 5. Bug Reporting
- 6. Contributors
- 7. Contacts
- 8. License
- 9. Copyright
+ 4. Run
+ 5. Documentation
+ 6. Bug Reporting
+ 7. Contributors
+ 8. Contacts
+ 9. License
+ 10. Copyright
 
 
 1. Synopsis
@@ -29,8 +30,18 @@ You can find the latest version of SemSim on :
 SemSim is a full python project thus as long as Python is installed on your
 system you can install it by moving in the root folder (the folder this README
 file should be) and run :
-    python setup.py install
-In some systems you need Administrator right to run this command.
+    python setup.px install
+
+Warning : SemSim requires these packages to be used in full :
+
+ * gridsim
+ * influxdb
+ 
+4. Run
+===
+SemSim is an executable project thus you can run it by moving in the root 
+folder (the folder this README file should be) and run :
+    python main.py
 
 Warning : SemSim requires these packages to be used in full :
 
@@ -38,19 +49,19 @@ Warning : SemSim requires these packages to be used in full :
  * influxdb
 
 
-4. Documentation
+5. Documentation
 ===
 A documentation is provided with this release in './doc' folder.
 
 
-5. Bug Reporting
+6. Bug Reporting
 ===
 If you find any bugs, or if you want new features you can put your request on
 github at the following address :
     https://github.com/gridsim/
 
 
-6. Contributors
+7. Contributors
 ===
 
 The SemSim Team is currently composed of :
@@ -61,20 +72,20 @@ The SemSim Team is currently composed of :
  * Pierre Roduit (pierre.roduit@hevs.ch)
 
 
-7. Contacts
+8. Contacts
 ===
 For questions, bug reports, patches and new elements / modules, contact :
 gridsim@hevs.ch.
 
 
-8. License
+9. License
 ===
 You should have received a copy of the GNU General Public License along with
 this program.
 If not, see <http://www.gnu.org/licenses/>.
 
 
-9. Copyright
+10. Copyright
 ===
 Copyright (C) 2011-2014 The Gridsim Team
 
