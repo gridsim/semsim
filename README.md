@@ -55,11 +55,8 @@ github at the following address :
 
 The SimSem Team is currently composed of :
 
- * Michael Clausen (clm@hevs.ch)
  * Dominique Gabioud (dominique.gabioud@hevs.ch)
- * Gilbert Maitre (gilbert.maitre@hevs.ch)
  * Gillian Basso (gillian.basso@hevs.ch)
- * Michael Sequeira Carvalho (michael.sequeira@hevs.ch)
  * Pierre Ferrez (pierre.ferrez@hevs.ch)
  * Pierre Roduit (pierre.roduit@hevs.ch)
 
