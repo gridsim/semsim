@@ -249,6 +249,8 @@ class Boiler(AbstractElectricalCPSElement):
         super(Boiler, self).\
             __init__(friendly_name)
 
+        self._time_converter = time_converter
+
         self._time_series = time_series
         self._time_series.load(time_converter=time_converter)
 
@@ -316,11 +318,12 @@ class Boiler(AbstractElectricalCPSElement):
 
     @accepts(((1, 2), (int, float)))
     def calculate(self, time, delta_time):
+
         self._time_series.set_time(time)
 
         unit_delta_time = delta_time
 
-        volume = units.to_si(units(self._time_series.volume, units.litre))
+        volume = units.to_si(units(self._time_series.volume, units.litre))*delta_time/units.value(self._time_converter(1), units.second)
 
         # thermal losses when used [W/K]
         on_losses = units.value(volume)*units.value(Water().weight)*units.value(Water().thermal_capacity)/unit_delta_time
