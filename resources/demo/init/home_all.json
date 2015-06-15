@@ -4319,7 +4319,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000001",
@@ -4340,7 +4340,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000002",
@@ -4361,7 +4361,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000003",
@@ -4382,7 +4382,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000004",
@@ -4403,7 +4403,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000005",
@@ -4424,7 +4424,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000006",
@@ -4445,7 +4445,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000007",
@@ -4466,7 +4466,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000008",
@@ -4487,7 +4487,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000009",
@@ -4508,7 +4508,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000010",
@@ -4529,7 +4529,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000011",
@@ -4550,7 +4550,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000012",
@@ -4571,7 +4571,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000013",
@@ -4592,7 +4592,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000014",
@@ -4613,7 +4613,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000015",
@@ -4634,7 +4634,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000016",
@@ -4655,7 +4655,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000017",
@@ -4676,7 +4676,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000018",
@@ -4697,7 +4697,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000019",
@@ -4718,7 +4718,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000020",
@@ -4739,7 +4739,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000021",
@@ -4760,7 +4760,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000022",
@@ -4781,7 +4781,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000023",
@@ -4802,7 +4802,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000024",
@@ -4823,7 +4823,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000025",
@@ -4844,7 +4844,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000026",
@@ -4865,7 +4865,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000027",
@@ -4886,7 +4886,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000028",
@@ -4907,7 +4907,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000029",
@@ -4928,7 +4928,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000030",
@@ -4949,7 +4949,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000031",
@@ -4970,7 +4970,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000032",
@@ -4991,7 +4991,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000033",
@@ -5012,7 +5012,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000034",
@@ -5033,7 +5033,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000035",
@@ -5054,7 +5054,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000036",
@@ -5075,7 +5075,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000037",
@@ -5096,7 +5096,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000038",
@@ -5117,7 +5117,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000039",
@@ -5138,7 +5138,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000040",
@@ -5159,7 +5159,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000041",
@@ -5180,7 +5180,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000042",
@@ -5201,7 +5201,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000043",
@@ -5222,7 +5222,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000044",
@@ -5243,7 +5243,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000045",
@@ -5264,7 +5264,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000046",
@@ -5285,7 +5285,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000047",
@@ -5306,7 +5306,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000048",
@@ -5327,7 +5327,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000049",
@@ -5348,7 +5348,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000050",
@@ -5369,7 +5369,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000051",
@@ -5390,7 +5390,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000052",
@@ -5411,7 +5411,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000053",
@@ -5432,7 +5432,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000054",
@@ -5453,7 +5453,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000055",
@@ -5474,7 +5474,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000056",
@@ -5495,7 +5495,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000057",
@@ -5516,7 +5516,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000058",
@@ -5537,7 +5537,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000059",
@@ -5558,7 +5558,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000060",
@@ -5579,7 +5579,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000061",
@@ -5600,7 +5600,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000062",
@@ -5621,7 +5621,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000063",
@@ -5642,7 +5642,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000064",
@@ -5663,7 +5663,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000065",
@@ -5684,7 +5684,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000066",
@@ -5705,7 +5705,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000067",
@@ -5726,7 +5726,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000068",
@@ -5747,7 +5747,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000069",
@@ -5768,7 +5768,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000070",
@@ -5789,7 +5789,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000071",
@@ -5810,7 +5810,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000072",
@@ -5831,7 +5831,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000073",
@@ -5852,7 +5852,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000074",
@@ -5873,7 +5873,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000075",
@@ -5894,7 +5894,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000076",
@@ -5915,7 +5915,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000077",
@@ -5936,7 +5936,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000078",
@@ -5957,7 +5957,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000079",
@@ -5978,7 +5978,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000080",
@@ -5999,7 +5999,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000081",
@@ -6020,7 +6020,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000082",
@@ -6041,7 +6041,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000083",
@@ -6062,7 +6062,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000084",
@@ -6083,7 +6083,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000085",
@@ -6104,7 +6104,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000086",
@@ -6125,7 +6125,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000087",
@@ -6146,7 +6146,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000088",
@@ -6167,7 +6167,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000089",
@@ -6188,7 +6188,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000090",
@@ -6209,7 +6209,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000091",
@@ -6230,7 +6230,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000092",
@@ -6251,7 +6251,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000093",
@@ -6272,7 +6272,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000094",
@@ -6293,7 +6293,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000095",
@@ -6314,7 +6314,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000096",
@@ -6335,7 +6335,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000097",
@@ -6356,7 +6356,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000098",
@@ -6377,7 +6377,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000099",
@@ -6398,7 +6398,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000100",

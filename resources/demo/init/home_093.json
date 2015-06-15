@@ -141,7 +141,7 @@
       "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "data": "../resources/data/example_time_series.csv"
+      "data": "../resources/demo/outside/default.csv"
     },
     {
       "friendly_name": "house_000093",
