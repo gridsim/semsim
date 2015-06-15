@@ -1,18 +1,19 @@
 {
   "controllers": [
     {
+      "type": "Thermostat",
       "params": {
         "thermal_process": "#room_080",
         "attribute": "on",
         "friendly_name": "thermostat_080",
-        "hysteresis": "1.338553*delta_degC",
-        "target_temperature": "292.676038*kelvin",
+        "hysteresis": "1.655073*delta_degC",
+        "target_temperature": "293.477084*kelvin",
         "subject": "#heater_080"
       },
-      "type": "Thermostat",
       "module": "devices"
     },
     {
+      "type": "Thermostat",
       "params": {
         "thermal_process": "#boiler_080",
         "attribute": "on",
@@ -21,39 +22,37 @@
         "target_temperature": "328.15*kelvin",
         "subject": "#boiler_080"
       },
-      "type": "Thermostat",
       "module": "devices"
     }
   ],
   "thermal": [
     {
-      "params": {
-        "initial_temperature": "292.967458*kelvin",
-        "thermal_capacity": "1003.586494*J/(kg*K)",
-        "friendly_name": "room_080",
-        "mass": "146.329381*metre*metre * 2.5*metre * 1.200*kg/(m**3)"
-      },
       "type": "ThermalProcess",
+      "params": {
+        "initial_temperature": "294.509290*kelvin",
+        "friendly_name": "room_080",
+        "thermal_capacity": "10.523513*kWh/(kg*K)"
+      },
       "module": "gridsim.thermal.core"
     },
     {
+      "type": "TimeSeriesThermalProcess",
       "params": {
         "time_converter": "lambda t: t*units.hours",
-        "time_series": "#default",
+        "time_series": "#example",
         "temperature_calculator": "lambda t: units.convert(units(t, units.degC), units.kelvin)",
         "friendly_name": "outside"
       },
-      "type": "TimeSeriesThermalProcess",
       "module": "gridsim.thermal.element"
     },
     {
+      "type": "ThermalCoupling",
       "params": {
         "from_process": "#room_080",
-        "to_process": "#outside",
+        "thermal_conductivity": "132.735525*W/(K*m)",
         "friendly_name": "room_080 to outside",
-        "thermal_conductivity": "6.699108*W/(K*m)"
+        "to_process": "#outside"
       },
-      "type": "ThermalCoupling",
       "module": "gridsim.thermal.core"
     }
   ],
@@ -75,41 +74,42 @@
     "branches": [
       {
         "two_port": "#Line_080",
-        "bus_b": "Bus_080",
         "friendly_name": "Branch_080",
+        "bus_b": "Bus_080",
         "bus_a": "Slack Bus"
       }
     ],
     "devices": [
       {
+        "type": "ElectricalTransmissionLine",
         "params": {
           "X": "0.2*ohm",
           "length": "1*m",
           "friendly_name": "Line_080"
         },
-        "type": "ElectricalTransmissionLine",
         "module": "gridsim.electrical.network"
       },
       {
+        "type": "ElectroThermalHeaterCooler",
         "params": {
           "thermal_process": "#room_080",
-          "pwr": "835.221244watt",
           "friendly_name": "heater_080",
-          "efficiency_factor": "3.206461"
+          "pwr": "1722.434695*watt",
+          "efficiency_factor": "3.193154"
         },
-        "type": "ElectroThermalHeaterCooler",
         "module": "devices"
       },
       {
+        "type": "TimeSeriesElectricalCPSElement",
         "params": {
           "time_converter": "lambda t: t*units.minute",
           "time_series": "#house_000080",
           "friendly_name": "house_080"
         },
-        "type": "TimeSeriesElectricalCPSElement",
         "module": "gridsim.electrical.element"
       },
       {
+        "type": "Boiler",
         "params": {
           "temperature_in": "288.15*kelvin",
           "power": "2400*watt",
@@ -122,41 +122,40 @@
           "radius": "20cm",
           "height": "160cm"
         },
-        "type": "Boiler",
         "module": "devices"
       }
     ],
     "buses": [
       {
+        "type": "ElectricalPQBus",
         "params": {
           "friendly_name": "Bus_080"
         },
-        "type": "ElectricalPQBus",
         "module": "gridsim.electrical.network"
       }
     ]
   },
   "time_series": [
     {
+      "friendly_name": "example",
+      "reader": "CSVReader",
       "type": "SortedConstantStepTimeSeriesObject",
-      "friendly_name": "default",
-      "data": "../resources/demo/outside/default.csv",
       "module": "gridsim.timeseries",
-      "reader": "CSVReader"
+      "data": "../resources/data/example_time_series.csv"
     },
     {
-      "type": "SortedConstantStepTimeSeriesObject",
       "friendly_name": "house_000080",
-      "data": "../resources/demo/houses/house_000080.csv",
+      "reader": "CSVReader",
+      "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "reader": "CSVReader"
+      "data": "../resources/demo/houses/house_000080.csv"
     },
     {
-      "type": "SortedConstantStepTimeSeriesObject",
       "friendly_name": "boiler_000080",
-      "data": "../resources/demo/boilers/house_000080.csv",
+      "reader": "CSVReader",
+      "type": "SortedConstantStepTimeSeriesObject",
       "module": "gridsim.timeseries",
-      "reader": "CSVReader"
+      "data": "../resources/demo/boilers/house_000080.csv"
     }
   ],
   "name": "Thermal demo"
