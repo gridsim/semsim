@@ -37,19 +37,28 @@ if __name__ == '__main__':
 
         # boiler
 
-        c = PlotRecorder('power')
-        reader.simulator.record(c, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
-        t = PlotRecorder('temperature')
-        reader.simulator.record(t, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
-        on = PlotRecorder('on')
-        reader.simulator.record(on, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
+        boiler_name = 'boiler_'+str(reader.name)
+        boiler = reader.simulator.electrical.find(friendly_name=boiler_name)
+
+        if boiler:
+            c = PlotRecorder('power')
+            reader.simulator.record(c, boiler)
+            t = PlotRecorder('temperature')
+            reader.simulator.record(t, boiler)
+            on = PlotRecorder('on')
+            reader.simulator.record(on, boiler)
         
         # heat pump
-        
-        c_hp = PlotRecorder('power')
-        reader.simulator.record(c_hp, reader.simulator.electrical.find(friendly_name='heater_'+str(reader.name)))
-        on_hp = PlotRecorder('on')
-        reader.simulator.record(on_hp, reader.simulator.electrical.find(friendly_name='heater_'+str(reader.name)))
+
+
+        heat_pump_name = 'heater_'+str(reader.name)
+        heat_pump = reader.simulator.electrical.find(friendly_name=heat_pump_name)
+
+        if heat_pump:
+            c_hp = PlotRecorder('power')
+            reader.simulator.record(c_hp, heat_pump)
+            on_hp = PlotRecorder('on')
+            reader.simulator.record(on_hp, heat_pump)
 
         print("Running simulation...")
 
@@ -62,22 +71,24 @@ if __name__ == '__main__':
         FigureSaver(temp, "Temperature").save(output_dir+'temp.pdf')
         FigureSaver(power, "Power").save(output_dir+'power.pdf')
 
-        boiler_dir = output_dir+'boiler/'
-        if not os.path.exists(boiler_dir):
-            os.makedirs(boiler_dir)
+        if boiler:
+            boiler_dir = output_dir+'boiler/'
+            if not os.path.exists(boiler_dir):
+                os.makedirs(boiler_dir)
 
-        FigureSaver(c, "Power").save(boiler_dir+'power.pdf')
-        CSVSaver(c).save(boiler_dir+'power.csv')
-        FigureSaver(t, "Temperature").save(boiler_dir+'temp.pdf')
-        CSVSaver(t).save(boiler_dir+'temp.csv')
-        FigureSaver(on, "Control").save(boiler_dir+'control.pdf')
-        CSVSaver(on).save(boiler_dir+'control.csv')
+            FigureSaver(c, "Power").save(boiler_dir+'power.pdf')
+            CSVSaver(c).save(boiler_dir+'power.csv')
+            FigureSaver(t, "Temperature").save(boiler_dir+'temp.pdf')
+            CSVSaver(t).save(boiler_dir+'temp.csv')
+            FigureSaver(on, "Control").save(boiler_dir+'control.pdf')
+            CSVSaver(on).save(boiler_dir+'control.csv')
 
-        hp_dir = output_dir+'hp/'
-        if not os.path.exists(hp_dir):
-            os.makedirs(hp_dir)
+        if heat_pump:
+            hp_dir = output_dir+'hp/'
+            if not os.path.exists(hp_dir):
+                os.makedirs(hp_dir)
 
-        FigureSaver(on_hp, "Control").save(hp_dir+'control.pdf')
-        CSVSaver(on_hp).save(hp_dir+'control.csv')
-        FigureSaver(c_hp, "Power").save(hp_dir+'power.pdf')
-        CSVSaver(c_hp).save(hp_dir+'power.csv')
+            FigureSaver(on_hp, "Control").save(hp_dir+'control.pdf')
+            CSVSaver(on_hp).save(hp_dir+'control.csv')
+            FigureSaver(c_hp, "Power").save(hp_dir+'power.pdf')
+            CSVSaver(c_hp).save(hp_dir+'power.csv')
