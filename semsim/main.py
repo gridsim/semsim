@@ -1,3 +1,5 @@
+import sys
+
 from scenario import ScenarioReader
 from interpreter import JSONInterpreter
 
@@ -9,20 +11,17 @@ from sumrecorder import SumRecorder
 
 if __name__ == '__main__':
 
-    for i in range(1, 2):
+    for args in sys.argv[1:]:
 
-        house_type = '%03d' % i
-        house_type = "all"
+        print "Loading file "+str(args)
 
-        f = '../resources/demo/init/home_'+house_type+'.json'
+        reader = ScenarioReader(JSONInterpreter(args))
 
-        output_dir = "../output/"+house_type+"/"
+        print "name: "+str(reader.name)
+
+        output_dir = "../output/"+reader.name+"/"
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-
-        print "Loading file "+str(f)
-
-        reader = ScenarioReader(JSONInterpreter(f))
 
         temp = PlotRecorder('temperature', y_unit=units.degC)
         reader.simulator.record(temp, reader.simulator.thermal.find(has_attribute='temperature'))
@@ -34,36 +33,32 @@ if __name__ == '__main__':
         devices = [x for x in devices if not x.friendly_name.startswith('boiler')]
         devices = [x for x in devices if not x.friendly_name.startswith('heater')]
 
-        print devices
-
         reader.simulator.record(power, devices)
 
         # boiler
 
         c = PlotRecorder('power')
-        reader.simulator.record(c, reader.simulator.electrical.find(friendly_name='boiler_%03d' % i))
+        reader.simulator.record(c, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
         t = PlotRecorder('temperature')
-        reader.simulator.record(t, reader.simulator.electrical.find(friendly_name='boiler_%03d' % i))
+        reader.simulator.record(t, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
         on = PlotRecorder('on')
-        reader.simulator.record(on, reader.simulator.electrical.find(friendly_name='boiler_%03d' % i))
-
+        reader.simulator.record(on, reader.simulator.electrical.find(friendly_name='boiler_'+str(reader.name)))
+        
         # heat pump
-
+        
         c_hp = PlotRecorder('power')
-        reader.simulator.record(c_hp, reader.simulator.electrical.find(friendly_name='heater_%03d' % i))
+        reader.simulator.record(c_hp, reader.simulator.electrical.find(friendly_name='heater_'+str(reader.name)))
         on_hp = PlotRecorder('on')
-        reader.simulator.record(on_hp, reader.simulator.electrical.find(friendly_name='heater_%03d' % i))
+        reader.simulator.record(on_hp, reader.simulator.electrical.find(friendly_name='heater_'+str(reader.name)))
 
         print("Running simulation...")
 
-        # Run the simulation for an hour with a resolution of 1 second.
+        # Run the simulation for several days with a resolution of 1 minute.
         reader.simulator.reset()
-        reader.simulator.run(units.days, units.minute)
+        reader.simulator.run(reader.days*units.days, units.minute)
 
         print("Saving data...")
 
-        # Create a PD document, add the two figures of the plot recorder to the
-        # document and close the document.
         FigureSaver(temp, "Temperature").save(output_dir+'temp.pdf')
         FigureSaver(power, "Power").save(output_dir+'power.pdf')
 

@@ -27,3 +27,12 @@ class ScenarioReader(object):
     @property
     def simulator(self):
         return self._simulator
+
+    @property
+    def name(self):
+        return self._decoder.name
+
+    @property
+    def days(self):
+        return self._decoder.days
+
