@@ -43,7 +43,9 @@ Warning : SemSim requires these packages to be used in full :
 SemSim is an executable project thus you can run it by moving in the root 
 folder (the folder this README file should be) and run :
 
-    python main.py
+    python semsim/main.py <jsonfile>
+
+with, `<jsonfile>` a json file representing the simulation.
 
 Warning : SemSim requires these packages to be used in full :
 
