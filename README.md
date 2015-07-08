@@ -62,7 +62,7 @@ A documentation is provided with this release in './doc' folder.
 ===
 If you find any bugs, or if you want new features you can put your request on
 github at the following address :
-    https://github.com/gridsim/
+    https://github.com/gridsim/semsim
 
 
 7. Contributors
