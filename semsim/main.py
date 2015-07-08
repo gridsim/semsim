@@ -11,6 +11,8 @@ from sumrecorder import SumRecorder
 
 if __name__ == '__main__':
 
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
     for args in sys.argv[1:]:
 
         print "Loading file "+str(args)
