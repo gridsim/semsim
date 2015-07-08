@@ -30,8 +30,6 @@ if __name__ == '__main__':
         power = SumRecorder('power', units.hour, units.kilowatt)
 
         devices = reader.simulator.electrical.find(has_attribute='power')
-        devices = [x for x in devices if not x.friendly_name.startswith('boiler')]
-        devices = [x for x in devices if not x.friendly_name.startswith('heater')]
 
         reader.simulator.record(power, devices)
 
@@ -60,6 +58,8 @@ if __name__ == '__main__':
         # Run the simulation for several days with a resolution of 1 minute.
         reader.simulator.reset()
         reader.simulator.run(reader.days*units.days, units.minute)
+
+        reader.close()
 
         print("Saving data...")
 

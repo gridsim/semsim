@@ -56,13 +56,14 @@ class Thermostat(AbstractControllerElement):
         :type position: :class:`Position`
         """
         super(Thermostat, self).__init__(friendly_name, position)
-        self.target_temperature = units.value(target_temperature, units.kelvin)
+
+        self._target_temperature = units.value(target_temperature, units.kelvin)
         """
         The temperature to try to retain inside the observer thermal process by
         conducting an electrothermal element.
         """
 
-        self.hysteresis = units.value(hysteresis, units.kelvin)
+        self._hysteresis = units.value(hysteresis, units.kelvin)
         """
         The +- hysteresis applied to the temperature measure in order to avoid
         to fast on/off switching.
@@ -70,35 +71,39 @@ class Thermostat(AbstractControllerElement):
 
         if not hasattr(thermal_process, 'temperature'):
             raise TypeError('thermal_process')
-        self.thermal_process = thermal_process
+        self._thermal_process = thermal_process
         """
         The reference to the thermal process to observe and read the
         temperature from.
         """
 
-        self.subject = subject
+        self._subject = subject
         """
         The reference to the element to control.
         """
 
-        self.attribute = attribute
+        self._attribute = attribute
         """
         Name of the attribute to control.
         """
 
-        self.on_value = on_value
+        self._on_value = on_value
         """
         Value to set in order to turn the element on.
         """
 
-        self.off_value = off_value
+        self._off_value = off_value
         """
         Value to set in order to turn the element off.
         """
+        self._is_on = True
 
         self._output_value = off_value
 
         self.calculate(0, 0)
+
+    def influence(self, data):
+        self._is_on = (data == 'True')
 
     # AbstractSimulationElement implementation.
     def reset(self):
@@ -115,12 +120,15 @@ class Thermostat(AbstractControllerElement):
 
         .. seealso:: :func:`gridsim.core.AbstractSimulationElement.calculate`.
         """
-        actual_temperature = self.thermal_process.temperature
+        if self._is_on:
+            actual_temperature = self._thermal_process.temperature
 
-        if actual_temperature < (self.target_temperature-self.hysteresis/2.):
-            self._output_value = self.on_value
-        elif actual_temperature > (self.target_temperature+self.hysteresis/2.):
-            self._output_value = self.off_value
+            if actual_temperature < (self._target_temperature-self._hysteresis/2.):
+                self._output_value = self._on_value
+            elif actual_temperature > (self._target_temperature+self._hysteresis/2.):
+                self._output_value = self._off_value
+        else:
+            self._output_value = self._off_value
 
     def update(self, time, delta_time):
         """
@@ -128,7 +136,7 @@ class Thermostat(AbstractControllerElement):
 
         .. seealso:: :func:`gridsim.core.AbstractSimulationElement.update`.
         """
-        setattr(self.subject, self.attribute, self._output_value)
+        setattr(self._subject, self._attribute, self._output_value)
 
 
 class ElectroThermalHeaterCooler(AbstractElectricalCPSElement):

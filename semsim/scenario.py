@@ -1,8 +1,8 @@
 from gridsim.simulation import Simulator
 from gridsim.electrical.loadflow import DirectLoadFlowCalculator
-import gridsim.thermal
 
 from decoder import ScenarioDecoder
+
 
 class ScenarioReader(object):
 
@@ -16,13 +16,7 @@ class ScenarioReader(object):
         self._decoder = ScenarioDecoder(self.simulator)
         self._decoder.decode(content)
 
-        # for device in self._decoder.devices[ScenarioDecoder.THERMAL_KEY][ScenarioDecoder.DEVICES_KEY]:
-        #     self._simulator.thermal.add(device)
-        # temp = PlotRecorder('temperature', units.day, units.degC)
-        # reader.simulator.record(temp, reader.simulator.thermal.find(has_attribute='temperature'))
-        #
-        # powa = PlotRecorder('Pij', units.day, units.watt)
-        # reader.simulator.record(powa, reader.simulator.electrical.find(element_class=ElectricalNetworkBranch))
+        self._decoder.network.start_server()
 
     @property
     def simulator(self):
@@ -36,3 +30,5 @@ class ScenarioReader(object):
     def days(self):
         return self._decoder.days
 
+    def close(self):
+        self._decoder.network.close()

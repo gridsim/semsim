@@ -1,4 +1,9 @@
 {
+  "network": {
+    "host": "localhost",
+    "port": "60123"
+
+  },
   "controllers": [
     {
       "type": "Thermostat",
@@ -33,7 +38,8 @@
         "friendly_name": "room_001",
         "thermal_capacity": "24.392897*kWh/(kg*K)"
       },
-      "module": "gridsim.thermal.core"
+      "module": "gridsim.thermal.core",
+      "record": ["temperature"]
     },
     {
       "type": "TimeSeriesThermalProcess",
@@ -43,7 +49,8 @@
         "temperature_calculator": "lambda t: units.convert(units(t, units.degC), units.kelvin)",
         "friendly_name": "outside"
       },
-      "module": "gridsim.thermal.element"
+      "module": "gridsim.thermal.element",
+      "record": ["temperature"]
     },
     {
       "type": "ThermalCoupling",
@@ -97,7 +104,8 @@
           "pwr": "8667.645402*watt",
           "efficiency_factor": "3.172719"
         },
-        "module": "devices"
+        "module": "devices",
+        "record": ["power", "on"]
       },
       {
         "type": "TimeSeriesElectricalCPSElement",
