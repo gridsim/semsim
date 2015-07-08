@@ -30,7 +30,8 @@ You can find the latest version of SemSim on :
 SemSim is a full python project thus as long as Python is installed on your
 system you can install it by moving in the root folder (the folder this README
 file should be) and run :
-    python setup.px install
+
+    python setup.py install
 
 Warning : SemSim requires these packages to be used in full :
 
@@ -41,6 +42,7 @@ Warning : SemSim requires these packages to be used in full :
 ===
 SemSim is an executable project thus you can run it by moving in the root 
 folder (the folder this README file should be) and run :
+
     python main.py
 
 Warning : SemSim requires these packages to be used in full :
