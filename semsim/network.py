@@ -167,7 +167,7 @@ class BlockedServer(object):
 class JSONBlockedServer(BlockedServer):
 
     def __init__(self, host, port):
-        super(JSONBlockedServer,self).__init__(host, port)
+        super(JSONBlockedServer, self).__init__(host, port)
 
     @property
     def line_separator(self):

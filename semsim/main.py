@@ -1,87 +1,50 @@
+import os
 import sys
+import threading
 
-from scenario import ScenarioReader
-from interpreter import JSONInterpreter
+import singlesim
+import distsim
+from recorders import SumRecorder
+from gridsim.iodata.output import FigureSaver
 
-from gridsim.recorder import *
-from gridsim.unit import units
-from gridsim.iodata.output import *
-
-from sumrecorder import SumRecorder
 
 if __name__ == '__main__':
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    for args in sys.argv[1:]:
+    args = sys.argv[1:]
 
-        print "Loading file "+str(args)
+    # the '-d' option distributes the simulations
+    if '-d' in args:
 
-        reader = ScenarioReader(JSONInterpreter(args))
+        threads = []
 
-        print "name: "+str(reader.name)
+        # launch each simulation in its own thread
+        for arg in [arg for arg in args if arg != '-d']:
+            thread = threading.Thread(target=distsim.run, args=(arg,))
+            threads.append(thread)
+            thread.start()
+        # here, simulations are waiting for connections
+        print "Wait..."
 
-        output_dir = "../output/"+reader.name+"/"
+        while threads:
+            for thread in threads:
+                if not thread.is_alive():
+                    threads.remove(thread)
+
+        print "Go!"
+
+        output_dir = "../output/dist/"
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        temp = PlotRecorder('temperature', units.hour, units.degC)
-        reader.simulator.record(temp, reader.simulator.thermal.find(has_attribute='temperature'))
+        for recorder, number in list(distsim.recorders.queue):
+            if type(recorder) is SumRecorder:
+                FigureSaver(recorder, "Power").save(output_dir+recorder.attribute_name+number+'.pdf')
+            else:
+                FigureSaver(recorder, "Temperature").save(output_dir+recorder.attribute_name+number+'.pdf')
 
-        # Create a plot recorder that records the power used by the electrical heater.
-        power = SumRecorder('power', units.hour, units.kilowatt)
+        print "End of simulations"
 
-        devices = reader.simulator.electrical.find(has_attribute='power')
-
-        reader.simulator.record(power, devices)
-
-        # boiler
-
-        boiler_name = 'boiler_'+str(reader.name)
-        boiler = reader.simulator.electrical.find(friendly_name=boiler_name)
-
-        if boiler:
-            c = PlotRecorder('power', units.hour, units.kilowatt)
-            reader.simulator.record(c, boiler)
-            t = PlotRecorder('temperature', units.hour, units.degC)
-            reader.simulator.record(t, boiler)
-        
-        # heat pump
-
-        heat_pump_name = 'heater_'+str(reader.name)
-        heat_pump = reader.simulator.electrical.find(friendly_name=heat_pump_name)
-
-        if heat_pump:
-            c_hp = PlotRecorder('power', units.hour, units.kilowatt)
-            reader.simulator.record(c_hp, heat_pump)
-
-        print("Running simulation...")
-
-        # Run the simulation for several days with a resolution of 1 minute.
-        reader.simulator.reset()
-        reader.simulator.run(reader.days*units.days, units.minute)
-
-        reader.close()
-
-        print("Saving data...")
-
-        FigureSaver(temp, "Temperature").save(output_dir+'temp.pdf')
-        FigureSaver(power, "Power").save(output_dir+'power.pdf')
-
-        if boiler:
-            boiler_dir = output_dir+'boiler/'
-            if not os.path.exists(boiler_dir):
-                os.makedirs(boiler_dir)
-
-            FigureSaver(c, "Power").save(boiler_dir+'power.pdf')
-            CSVSaver(c).save(boiler_dir+'power.csv')
-            FigureSaver(t, "Temperature").save(boiler_dir+'temp.pdf')
-            CSVSaver(t).save(boiler_dir+'temp.csv')
-
-        if heat_pump:
-            hp_dir = output_dir+'hp/'
-            if not os.path.exists(hp_dir):
-                os.makedirs(hp_dir)
-
-            FigureSaver(c_hp, "Power").save(hp_dir+'power.pdf')
-            CSVSaver(c_hp).save(hp_dir+'power.csv')
+    else:  # a standard run is started
+        singlesim.run(args)
