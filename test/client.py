@@ -49,5 +49,5 @@ def run(host, port):
 
 if __name__ == "__main__":
 
-    #for port in range(60121, 60221):
-        thread = threading.Thread(target=run, args=("localhost", 60101)).start()
+    for port in range(60121, 60221):
+        thread = threading.Thread(target=run, args=("localhost", port)).start()
