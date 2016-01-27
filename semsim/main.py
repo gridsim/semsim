@@ -7,13 +7,15 @@ import singlesim
 import distsim
 from recorders import SumRecorder
 from gridsim.iodata.output import FigureSaver
+from gridsim.decorators import timed
 
 
-if __name__ == '__main__':
+@timed
+def main(argv):
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    args = sys.argv[1:]
+    args = argv[1:]
 
     # the '-d' option distributes the simulations
     if '-d' in args:
@@ -50,3 +52,6 @@ if __name__ == '__main__':
 
     else:  # a standard run is started
         singlesim.run(args)
+
+if __name__ == '__main__':
+    main(sys.argv)
