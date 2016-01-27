@@ -1,6 +1,7 @@
 import os
 import sys
-import threading
+import multiprocessing
+import time
 
 import singlesim
 import distsim
@@ -17,20 +18,21 @@ if __name__ == '__main__':
     # the '-d' option distributes the simulations
     if '-d' in args:
 
-        threads = []
+        processes = []
 
         # launch each simulation in its own thread
         for arg in [arg for arg in args if arg != '-d']:
-            thread = threading.Thread(target=distsim.run, args=(arg,))
-            threads.append(thread)
-            thread.start()
+            process = multiprocessing.Process(target=distsim.run, args=(arg,))
+            processes.append(process)
+            process.start()
         # here, simulations are waiting for connections
         print "Wait..."
 
-        while threads:
-            for thread in threads:
-                if not thread.is_alive():
-                    threads.remove(thread)
+        while processes:
+            time.sleep(0.01)
+            for p in processes:
+                if not p.is_alive():
+                    processes.remove(p)
 
         print "Go!"
 
