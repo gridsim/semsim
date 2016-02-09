@@ -9,7 +9,8 @@ import gridsim.controller
 
 from gridsim.unit import units
 from gridsim.iodata.input import *
-from network import TimeRecorder, NetworkManager, ValueRecorder
+
+from recorders import ForwardRecorder
 
 
 class ScenarioDecoder(object):
@@ -27,7 +28,6 @@ class ScenarioDecoder(object):
     ELECTRICAL_KEY = u"electrical"
     THERMAL_KEY = u"thermal"
     CONTROLLERS_KEY = u"controllers"
-    NETWORK_KEY = u"network"
 
     BUSES_KEY = u"buses"
     BRANCHES_KEY = u"branches"
@@ -35,7 +35,7 @@ class ScenarioDecoder(object):
     ATTACH_KEY = u"attach"
     RECORD = u"record"
 
-    def __init__(self, simulator):
+    def __init__(self, simulator, connection):
         super(ScenarioDecoder, self).__init__()
 
         self._name = ""
@@ -45,7 +45,7 @@ class ScenarioDecoder(object):
         self._devices = list()
         self._time_series = dict()
 
-        self._network = None
+        self._connection = connection
 
     @property
     def name(self):
@@ -54,10 +54,6 @@ class ScenarioDecoder(object):
     @property
     def days(self):
         return self._days
-
-    @property
-    def network(self):
-        return self._network
 
     def decode_container(self, data, key):
 
@@ -173,8 +169,8 @@ class ScenarioDecoder(object):
 
             if ScenarioDecoder.RECORD in d:
                 for record in d[ScenarioDecoder.RECORD]:
-                    rec = ValueRecorder(str(record))
-                    self._network.recorders.append(self._simulator.record(rec, obj))
+                    rec = ForwardRecorder(self._connection, str(record))
+                    self._simulator.record(rec, obj)
 
     def decode_buses(self, data):
 
@@ -191,8 +187,8 @@ class ScenarioDecoder(object):
 
             if ScenarioDecoder.RECORD in d:
                 for record in d[ScenarioDecoder.RECORD]:
-                    rec = ValueRecorder(str(record))
-                    self._network.recorders.append(self._simulator.record(rec, obj))
+                    rec = ForwardRecorder(self._connection, str(record))
+                    self._simulator.record(rec, obj)
 
     def decode_attach(self, data):
 
@@ -246,8 +242,8 @@ class ScenarioDecoder(object):
 
             if ScenarioDecoder.RECORD in d:
                 for record in d[ScenarioDecoder.RECORD]:
-                    rec = ValueRecorder(str(record))
-                    self._network.recorders.append(self._simulator.record(rec, obj))
+                    rec = ForwardRecorder(self._connection, str(record))
+                    self._simulator.record(rec, obj)
 
     def decode_thermal(self, data):
 
@@ -278,20 +274,8 @@ class ScenarioDecoder(object):
 
             params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
 
-            controller = self._simulator.controller.add(clazz(**params))
-            self._network.controllers.append(controller)
-
-    def decode_network(self, data):
-
-        network = data[ScenarioDecoder.NETWORK_KEY]
-
-        host = self.detect(network['host'])
-        port = self.detect(network['port'])
-
-        time_recorder = TimeRecorder('time')
-        self._simulator.record(time_recorder, None)
-
-        self._network = NetworkManager(host, port, time_recorder)
+# FIXME           controller = self._simulator.controller.add(clazz(**params))
+# FIXME           self._network.controllers.append(controller)
 
     def decode(self, data):
 
@@ -299,8 +283,6 @@ class ScenarioDecoder(object):
 
         if ScenarioDecoder.SCENARIO_DAYS_KEY in data:
             self._days = self.decode_number(data[ScenarioDecoder.SCENARIO_DAYS_KEY])
-
-        self.decode_network(data)
 
         self.decode_time_series(data)
         self.decode_thermal(data)

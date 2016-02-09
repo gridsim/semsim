@@ -3,6 +3,23 @@ from gridsim.recorder import Recorder, PlotRecorder
 from gridsim.iodata.output import AttributesGetter
 
 
+class ForwardRecorder(Recorder):
+
+    def __init__(self, connection, attribute_name, x_unit=None, y_unit=None):
+        super(ForwardRecorder, self).__init__(attribute_name, x_unit, y_unit)
+
+        self.connection = connection
+
+    def on_simulation_reset(self, subjects):
+        self.connection.send(("RESET", subjects))
+
+    def on_simulation_step(self, time):
+        self.connection.send(("STEP", time))
+
+    def on_observed_value(self, subject, time, value):
+        self.connection.send(("VALUE", subject, time, value))
+
+
 class SumRecorder(Recorder, AttributesGetter):
 
     def __init__(self, attribute_name, x_unit=None, y_unit=None):
