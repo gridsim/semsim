@@ -45,56 +45,6 @@ class NetworkManager(object):
         self._server.close()
 
 
-class ValueRecorder(Recorder):
-
-    def __init__(self, attribute_name, x_unit=None, y_unit=None):
-
-        super(ValueRecorder, self).__init__(attribute_name, x_unit, y_unit)
-        self.subjects = {}
-
-    def on_simulation_reset(self, subjects):
-        for subject in subjects:
-            self.subjects[subject] = None
-
-    def on_simulation_step(self, time):
-        pass
-
-    def on_observed_value(self, subject, time, value):
-        self.subjects[subject] = value
-
-
-class TimeRecorder(Recorder):
-
-    def __init__(self, attribute_name):
-
-        super(TimeRecorder, self).__init__(attribute_name, None, None)
-
-        self._network_manager = None
-        self._old_time = None
-
-    @property
-    def network_manager(self):
-        return self._network_manager
-
-    @network_manager.setter
-    def network_manager(self, nm):
-        self._network_manager = nm
-
-    def on_simulation_reset(self, subjects):
-        self._old_time = None
-
-    def on_simulation_step(self, time):
-        res = self._old_time
-        if self._old_time is not None:
-            self._network_manager.next_step(self._old_time)
-
-        self._old_time = time
-        return res
-
-    def on_observed_value(self, subject, time, value):
-        pass
-
-
 class BlockedServer(object):
 
     def __init__(self, host, port):
