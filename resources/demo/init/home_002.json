@@ -1,9 +1,4 @@
 {
-  "network": {
-    "host": "localhost",
-    "port": "60122"
-
-  },
   "controllers": [
     {
       "type": "Thermostat",
@@ -102,7 +97,8 @@
           "pwr": "5678.666442*watt",
           "efficiency_factor": "3.433905"
         },
-        "module": "devices"
+        "module": "devices",
+        "record": ["power", "on"]
       },
       {
         "type": "TimeSeriesElectricalCPSElement",

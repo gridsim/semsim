@@ -1,9 +1,4 @@
 {
-  "network": {
-    "host": "localhost",
-    "port": "60210"
-
-  },
   "controllers": [
     {
       "type": "Thermostat",
