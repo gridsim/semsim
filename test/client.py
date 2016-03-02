@@ -1,8 +1,7 @@
 import socket
 import sys
-import random
 import threading
-
+import json
 
 def run(host, port):
 
@@ -16,24 +15,37 @@ def run(host, port):
 
     try:
         mySocket.connect((host, port))
-        mySocket.settimeout(1.)
     except socket.error:
         print "connection failed."
         sys.exit()
     print "OK for "+str(port)
 
+    time = 0
     while True:
         try:
             data_buffer += mySocket.recv(4096)
             # print str(port) + '-> ' + data_buffer
-            reception, separator, data_buffer = data_buffer.partition(LINE_SEPARATOR)
-            # print reception, '|', separator, '|', data_buffer
+            reception, _, data_buffer = data_buffer.partition(LINE_SEPARATOR)
+            reception = reception.replace("'", '"')
+            print reception
 
-            on_off = True # bool(random.getrandbits(1))
-            # print on_off
-            data = '{"receiver": "thermostat_%03d", "value": "%s"}' % ((port-60120), str(on_off))
-            data+=LINE_SEPARATOR
-            mySocket.send(data)
+            listrcv= json.loads(reception)
+
+            if 'STEP' in listrcv:
+                time = listrcv['STEP'][1]
+                print "time: "+str(time)
+
+            if time > 8600:
+                break
+            else:
+                on_off = True  # bool(random.getrandbits(1))
+                # print on_off
+                data = 'thermostat_001 %s' % str(on_off)
+                data += LINE_SEPARATOR
+                data += 'STEP'
+                data += LINE_SEPARATOR
+                mySocket.send(data)
+
         except socket.error as e:
             print "error rised: "+str(e)
             if data_buffer:
@@ -49,5 +61,4 @@ def run(host, port):
 
 if __name__ == "__main__":
 
-    for port in range(60121, 60221):
-        thread = threading.Thread(target=run, args=("localhost", port)).start()
+    thread = threading.Thread(target=run, args=("localhost", 10600)).start()
