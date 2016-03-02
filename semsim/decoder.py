@@ -16,7 +16,6 @@ from recorders import ForwardRecorder
 class ScenarioDecoder(object):
 
     SCENARIO_NAME_KEY = u"name"
-    SCENARIO_DAYS_KEY = u"days"
 
     IMPORT_KEY = u"module"
     CLASS_KEY = u"type"
@@ -39,7 +38,6 @@ class ScenarioDecoder(object):
         super(ScenarioDecoder, self).__init__()
 
         self._name = ""
-        self._days = 1
 
         self._simulator = simulator
         self._devices = list()
@@ -50,10 +48,6 @@ class ScenarioDecoder(object):
     @property
     def name(self):
         return self._name
-
-    @property
-    def days(self):
-        return self._days
 
     def decode_container(self, data, key):
 
@@ -280,9 +274,6 @@ class ScenarioDecoder(object):
     def decode(self, data):
 
         self._name = self.decode_string(data[ScenarioDecoder.SCENARIO_NAME_KEY])
-
-        if ScenarioDecoder.SCENARIO_DAYS_KEY in data:
-            self._days = self.decode_number(data[ScenarioDecoder.SCENARIO_DAYS_KEY])
 
         self.decode_time_series(data)
         self.decode_thermal(data)

@@ -1,3 +1,5 @@
+import json
+
 from gridsim.decorators import accepts
 from gridsim.recorder import Recorder, PlotRecorder
 from gridsim.iodata.output import AttributesGetter
@@ -11,13 +13,13 @@ class ForwardRecorder(Recorder):
         self.connection = connection
 
     def on_simulation_reset(self, subjects):
-        self.connection.send(("RESET", subjects))
+        self.connection.send(json.dumps({"RESET": [self._attribute_name, subjects]}))
 
     def on_simulation_step(self, time):
-        self.connection.send(("STEP", time))
+        self.connection.send(json.dumps({"STEP": [self._attribute_name, time]}))
 
     def on_observed_value(self, subject, time, value):
-        self.connection.send(("VALUE", subject, time, value))
+        self.connection.send(json.dumps({"VALUE": [subject, self._attribute_name, time, value]}))
 
 
 class SumRecorder(Recorder, AttributesGetter):
