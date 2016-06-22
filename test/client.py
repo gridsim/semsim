@@ -3,6 +3,7 @@ import sys
 import threading
 import json
 
+
 def run(host, port):
 
     print("run "+str(host)+':'+str(port))
@@ -21,24 +22,34 @@ def run(host, port):
     print "OK for "+str(port)
 
     time = 0
+    all_data = {}
     while True:
         try:
             data_buffer += mySocket.recv(4096)
             # print str(port) + '-> ' + data_buffer
-            reception, _, data_buffer = data_buffer.partition(LINE_SEPARATOR)
-            reception = reception.replace("'", '"')
-            print reception
 
-            listrcv= json.loads(reception)
+            while LINE_SEPARATOR in data_buffer:
+                reception, _, data_buffer = data_buffer.partition(LINE_SEPARATOR)
+                reception = reception.replace("'", '"')
+                print reception
 
-            if 'STEP' in listrcv:
-                time = listrcv['STEP'][1]
-                print "time: "+str(time)
+                listrcv= json.loads(reception)
 
-            if time > 8600:
+                if 'VALUE' in listrcv:
+                    list_value = listrcv['VALUE']
+                    key = list_value[0]+'.'+list_value[1]
+                    if key not in all_data:
+                        all_data[key] = []
+                    all_data[key].append(float(list_value[3]))
+
+                if 'STEP' in listrcv:
+                    time = listrcv['STEP'][1]
+                    print "time: "+str(time)
+
+            if time > 86400*3:  # day
                 break
             else:
-                on_off = True  # bool(random.getrandbits(1))
+                on_off = False  # bool(random.getrandbits(1))
                 # print on_off
                 data = 'thermostat_001 %s' % str(on_off)
                 data += LINE_SEPARATOR
@@ -57,6 +68,10 @@ def run(host, port):
     print "Interrupted connection."
     mySocket.close()
     print("close "+str(host)+':'+str(port))
+
+    for k, d in all_data.iteritems():
+        with open('output/'+k, 'w') as fd:
+            fd.writelines([str(x)+'\n' for x in d])
 
 
 if __name__ == "__main__":

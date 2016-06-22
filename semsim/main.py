@@ -13,24 +13,26 @@ from gridsim.decorators import timed
 
 
 class SimulationParser(argparse.ArgumentParser):
-
     def __init__(self):
         super(SimulationParser, self).__init__()
 
-        self.add_argument('files', nargs='*', type=file, help='The list of the file to process. Each file will be managed by its own process and Gridsim simulator.')
+        self.add_argument('files', nargs='*', type=file,
+                          help='The list of the file to process. Each file will be managed by its own process and Gridsim simulator.')
         self.add_argument('--port', '-p', type=int, default=10600, help='The listen port. Default 10600.')
         self.add_argument('--version', '-V', action='version', version='The simulation use Gridsim v%s\n'
-                                                                 'Copyright (C) 2014-2016 The Gridsim Team.\n'
-                                                                 'License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n'
-                                                                 'This is free software: you are free to change and redistribute it.\n' % __version__)
-        self.add_argument('--file', '-f', action='store_true', help='Allow given one file containing a list of files to simplify the cammand line.')
+                                                                       'Copyright (C) 2014-2016 The Gridsim Team.\n'
+                                                                       'License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n'
+                                                                       'This is free software: you are free to change and redistribute it.\n' % __version__)
+        self.add_argument('--file', '-f', action='store_true',
+                          help='Allow given one file containing a list of files to simplify the cammand line.')
 
-        self.add_argument('--day', '-d', type=int, default=1, help='Define the number of day of the simulation. Default 1 day.')
-        self.add_argument('--step', '-s', type=int, default=60, help='Define the number of second of a time step simulation. Default 60 seconds.')
+        self.add_argument('--day', '-d', type=int, default=1,
+                          help='Define the number of day of the simulation. Default 1 day.')
+        self.add_argument('--step', '-s', type=int, default=60,
+                          help='Define the number of second of a time step simulation. Default 60 seconds.')
 
 
 class Runner(object):
-
     CONNECTION = 'Connection'
     TYPE = 'Type'
 
@@ -44,10 +46,7 @@ class Runner(object):
         self._is_ready = False
         self._constructed = False
 
-        # Create the argument parser
-        self._simulation_parser = SimulationParser()
-        # Process the arguments from sys.argv
-        args = self._simulation_parser.parse_args()
+        # Process the arguments from argv
 
         self._config_parser = ConfigParser.ConfigParser('')
         self._config_parser.read('exchange.cfg')
@@ -71,7 +70,7 @@ class Runner(object):
             print 'Waiting for a connection...'
             self._connection, client_address = self._socket.accept()
             # A client is connected
-            print 'client '+str(client_address)+' connected.'
+            print 'client ' + str(client_address) + ' connected.'
         except socket.error as se:
             print se
 
@@ -131,40 +130,40 @@ class Runner(object):
 
             # While at least one simulation is still running
             while self._processes:
-                    # Delay execution
-                    time.sleep(0.01)
+                # Delay execution
+                time.sleep(0.01)
 
-                    # Check data from sub-processes
-                    for p in self._processes.keys():
-                        if p.is_alive():  # If the process is alive
-                            # Retrieve the connection associated to the current process
+                # Check data from sub-processes
+                for p in self._processes.keys():
+                    if p.is_alive():  # If the process is alive
+                        # Retrieve the connection associated to the current process
+                        c = self._processes[p]
+                        while c.poll():  # While the connection has data
+                            self._message_buffer.append(c.recv())
+                    else:  # If the process is finished
+                        # Close properly the connection
+                        self._processes[p].close()
+                        # Remove the process from the list
+                        del self._processes[p]
+
+                # Loop to send data to processes
+                while self._message_buffer:
+                    # Get the first data store in the buffer
+                    current_data = self._message_buffer.pop(0)
+                    # Send data to the client
+                    self._connection.sendall(str(current_data) + self.LINE_SEPARATOR)
+
+                # While a data can be processed
+                if self.LINE_SEPARATOR in self._recv_data:
+                    one_data, _, self._recv_data = self._recv_data.partition(self.LINE_SEPARATOR)
+                    if one_data:
+                        # Send it to all the sub-processes
+                        for p in self._processes.keys():
                             c = self._processes[p]
-                            while c.poll():  # While the connection has data
-                                self._message_buffer.append(c.recv())
-                        else:  # If the process is finished
-                            # Close properly the connection
-                            self._processes[p].close()
-                            # Remove the process from the list
-                            del self._processes[p]
-
-                    # Loop to send data to processes
-                    while self._message_buffer:
-                        # Get the first data store in the buffer
-                        current_data = self._message_buffer.pop(0)
-                        # Send data to the client
-                        self._connection.sendall(str(current_data)+self.LINE_SEPARATOR)
-
-                    # While a data can be processed
-                    if self.LINE_SEPARATOR in self._recv_data:
-                        one_data, _, self._recv_data = self._recv_data.partition(self.LINE_SEPARATOR)
-                        if one_data:
-                            # Send it to all the sub-processes
-                            for p in self._processes.keys():
-                                c = self._processes[p]
-                                c.send(one_data)
-                    else:
-                        # Receive data from socket and forward to the simulators
-                        self._recv_data += self._connection.recv(4096)
+                            c.send(one_data)
+                else:
+                    # Receive data from socket and forward to the simulators
+                    self._recv_data += self._connection.recv(4096)
         else:
             print "simulation is not ready"
 
@@ -186,12 +185,22 @@ class Runner(object):
 
         print "End of simulations"
 
+
 if __name__ == '__main__':
 
     # Add the folder where this file is to the path
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    runner = Runner()
+    # Create the argument parser
+    simulation_parser = SimulationParser()
+
+    if len(sys.argv[1:]) == 0:
+        simulation_parser.print_help()
+        # parser.print_usage() # for just the usage line
+        simulation_parser.exit()
+    args = simulation_parser.parse_args()
+
+    runner = Runner(args)
 
     try:
         runner.init()

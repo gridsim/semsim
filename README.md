@@ -43,15 +43,24 @@ Warning : SemSim requires these packages to be used in full :
 SemSim is an executable project thus you can run it by moving in the root 
 folder (the folder this README file should be) and run :
 
-    python semsim/main.py <jsonfile>
+    python semsim/main.py [-h] [--port PORT] [--version] [--file] [--day DAY] [--step STEP] [files [files ...]]
 
-with, `<jsonfile>` a json file representing the simulation.
+with:
 
-Warning : SemSim requires these packages to be used in full :
+positional arguments:
+    files                   The list of the file to process. Each file will be managed by its own process and Gridsim simulator.
+
+optional arguments:
+    -h, --help              Show this help message and exit
+    --port PORT, -p PORT    The listen port. Default 10600.
+    --version, -V           Show program's version number and exit
+    --file, -f              Allow given one file containing a list of files to simplify the cammand line.
+    --day DAY, -d DAY       Define the number of day of the simulation. Default 1 day.
+    --step STEP, -s STEP    Define the number of second of a time step simulation. Default 60 seconds.
+
+Warning : SemSim requires these packages to be used in full:
 
  * gridsim
- * influxdb
-
 
 5. Documentation
 ===

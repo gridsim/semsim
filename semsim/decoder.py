@@ -268,8 +268,8 @@ class ScenarioDecoder(object):
 
             params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
 
-# FIXME           controller = self._simulator.controller.add(clazz(**params))
-# FIXME           self._network.controllers.append(controller)
+            controller = self._simulator.controller.add(clazz(**params))
+            # self._network.controllers.append(controller)
 
     def decode(self, data):
 
