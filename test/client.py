@@ -2,6 +2,7 @@ import socket
 import sys
 import threading
 import json
+import random
 
 
 def run(host, port):
@@ -21,7 +22,7 @@ def run(host, port):
         sys.exit()
     print "OK for "+str(port)
 
-    time = 0
+    current_time = time = 0
     all_data = {}
     while True:
         try:
@@ -31,7 +32,7 @@ def run(host, port):
             while LINE_SEPARATOR in data_buffer:
                 reception, _, data_buffer = data_buffer.partition(LINE_SEPARATOR)
                 reception = reception.replace("'", '"')
-                print reception
+                # print reception
 
                 listrcv= json.loads(reception)
 
@@ -44,14 +45,16 @@ def run(host, port):
 
                 if 'STEP' in listrcv:
                     time = listrcv['STEP'][1]
-                    print "time: "+str(time)
+                    if current_time < time:
+                        print "time: "+str(time)
+                        current_time = time
 
-            if time > 86400*3:  # day
+            if time > 86400*14:  # day
                 break
             else:
-                on_off = False  # bool(random.getrandbits(1))
+                on_off = bool(random.getrandbits(1))
                 # print on_off
-                data = 'thermostat_001 %s' % str(on_off)
+                data = 'nothing %s' % str(on_off)
                 data += LINE_SEPARATOR
                 data += 'STEP'
                 data += LINE_SEPARATOR
