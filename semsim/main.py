@@ -40,7 +40,7 @@ class Runner(object):
     LOAD = 'load'
     STOP = 'stop'
 
-    def __init__(self, argv=sys.argv):
+    def __init__(self, args=sys.argv):
         super(Runner, self).__init__()
 
         self._is_ready = False
@@ -78,9 +78,9 @@ class Runner(object):
         files = []
         if args.file:  # if the -f arg is used
             # Give a list of files. One file per line
-            strings = args.readlines()
             # Parse the given file to find the simulation files to load
-            for s in strings:
+            for s in args.files[0]:
+                s = s.rstrip()
                 files.append(open(s, 'r'))
         else:  # if -f is not used
             # The simulation files are directly given
