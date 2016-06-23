@@ -1,5 +1,6 @@
 import types
 import math
+import random
 
 from gridsim.decorators import accepts
 from gridsim.unit import units
@@ -98,7 +99,7 @@ class Thermostat(AbstractControllerElement):
         """
         self._is_on = True
 
-        self._output_value = off_value
+        self._output_value = on_value if bool(random.getrandbits(1)) else off_value
 
         self.calculate(0, 0)
 
@@ -175,12 +176,10 @@ class ElectroThermalHeaterCooler(AbstractElectricalCPSElement):
     # AbstractSimulationElement implementation.
     def reset(self):
         super(ElectroThermalHeaterCooler, self).reset()
-        self.on = False
+        self.on = True
 
     def calculate(self, time, delta_time):
-        self._internal_delta_energy = self._power * delta_time
-        if not self.on:
-            self._internal_delta_energy = 0
+        self._internal_delta_energy = self.power * delta_time
 
     def update(self, time, delta_time):
         super(ElectroThermalHeaterCooler, self).update(time, delta_time)
@@ -323,6 +322,7 @@ class Boiler(AbstractElectricalCPSElement):
         """
         self._temperature = self._initial_temperature
         self._time_series.set_time()
+        self._on = False
 
     @accepts(((1, 2), (int, float)))
     def calculate(self, time, delta_time):

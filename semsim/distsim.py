@@ -48,5 +48,4 @@ def run(arg_file, connection, second):
                     for controller in controllers:
                         controller.influence(data_list[1])
 
-
     print("End of simulation of "+str(decoder.name))
