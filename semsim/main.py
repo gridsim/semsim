@@ -107,7 +107,7 @@ class Runner(object):
 
             # wait for simulator initialisation
             counter = 0
-            while counter is not len(self._processes.keys()):
+            while not counter == len(self._processes.keys()):
                 for p in self._processes.keys():
                     # Retrieve the connection associated to the current process
                     c = self._processes[p]
