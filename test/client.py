@@ -49,7 +49,7 @@ def run(host, port):
                         print "time: "+str(time)
                         current_time = time
 
-            if time > 86400*14:  # day
+            if time > 86400/24:  # day
                 break
             else:
                 on_off = bool(random.getrandbits(1))

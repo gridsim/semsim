@@ -112,11 +112,12 @@ class Runner(object):
                     # Retrieve the connection associated to the current process
                     c = self._processes[p]
                     while c.poll():  # While the connection has data
-                        self._message_buffer.append(c.recv())
-                        for b in self._message_buffer[:]:
-                            if b == self._config_parser.get(Runner.TYPE, Runner.LOAD):
+                        message = c.recv()
+                        if message == self._config_parser.get(Runner.TYPE, Runner.LOAD):
                                 counter += 1
-                                self._message_buffer.remove(b)
+                        else:
+                            self._message_buffer.append(message)
+                        print len(self._message_buffer), self._message_buffer
 
             print "simulations loaded..."
             self._is_ready = True
