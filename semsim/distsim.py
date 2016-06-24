@@ -24,6 +24,7 @@ def run(arg_file, connection, second):
         decoder = ScenarioDecoder(simulator, connection)
         decoder.decode(json.load(json_file))
 
+    if simulator is not None and decoder is not None
         print("Running simulation: "+str(decoder.name))
 
         # Run the simulation for several days with a resolution of 1 minute.
@@ -48,4 +49,6 @@ def run(arg_file, connection, second):
                     for controller in controllers:
                         controller.influence(data_list[1])
 
-    print("End of simulation of "+str(decoder.name))
+        print("End of simulation of "+str(decoder.name))
+    else:
+        print "simulation "+arg_file+" cannot be launched."
