@@ -81,7 +81,7 @@ class Runner(object):
             # Parse the given file to find the simulation files to load
             for s in args.files[0]:
                 s = s.rstrip()
-                files.append(open(s, 'r'))
+                files.append(s)
         else:  # if -f is not used
             # The simulation files are directly given
             files = args.files
@@ -208,5 +208,5 @@ if __name__ == '__main__':
         runner.run()
     except socket.error as se:
         print se
-
-    runner.close()
+    finally:
+        runner.close()

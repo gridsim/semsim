@@ -10,9 +10,9 @@ from gridsim.electrical.loadflow import DirectLoadFlowCalculator
 
 def run(arg_file, connection, second):
 
-    print "Loading file "+arg_file.name
+    print "Loading file "+arg_file
 
-    with arg_file as json_file:
+    with open(arg_file, 'r') as json_file:
 
         # Create a config parser to homogenise data exchange between processes
         config_parser = ConfigParser.ConfigParser()
@@ -24,7 +24,7 @@ def run(arg_file, connection, second):
         decoder = ScenarioDecoder(simulator, connection)
         decoder.decode(json.load(json_file))
 
-    if simulator is not None and decoder is not None
+    if simulator is not None and decoder is not None:
         print("Running simulation: "+str(decoder.name))
 
         # Run the simulation for several days with a resolution of 1 minute.
