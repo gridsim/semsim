@@ -117,7 +117,6 @@ class Runner(object):
                                 counter += 1
                         else:
                             self._message_buffer.append(message)
-                        print len(self._message_buffer), self._message_buffer
 
             print "simulations loaded..."
             self._is_ready = True
