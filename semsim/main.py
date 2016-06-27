@@ -131,7 +131,6 @@ class Runner(object):
             # While at least one simulation is still running
             while self._processes:
                 # Delay execution
-                time.sleep(0.01)
 
                 # Check data from sub-processes
                 for p in self._processes.keys():

@@ -1,3 +1,4 @@
+import os
 import socket
 import sys
 import threading
@@ -6,6 +7,8 @@ import random
 
 
 def run(host, port):
+
+    OUTPUT_DIR = 'output/'
 
     print("run "+str(host)+':'+str(port))
 
@@ -24,7 +27,8 @@ def run(host, port):
 
     current_time = time = 0
     all_data = {}
-    while True:
+    finished = False
+    while not finished:
         try:
             data_buffer += mySocket.recv(4096)
             # print str(port) + '-> ' + data_buffer
@@ -49,16 +53,17 @@ def run(host, port):
                         print "time: "+str(time)
                         current_time = time
 
-            if time > 86400/24:  # day
-                break
-            else:
-                on_off = bool(random.getrandbits(1))
-                # print on_off
-                data = 'nothing %s' % str(on_off)
-                data += LINE_SEPARATOR
-                data += 'STEP'
-                data += LINE_SEPARATOR
-                mySocket.send(data)
+                        if time > 86400:  # day
+                            finished = True
+                            break
+                        else:
+                            on_off = bool(random.getrandbits(1))
+                            # print on_off
+                            data = 'nothing %s' % str(on_off)
+                            data += LINE_SEPARATOR
+                            data += 'STEP'
+                            data += LINE_SEPARATOR
+                            mySocket.send(data)
 
         except socket.error as e:
             print "error rised: "+str(e)
@@ -67,13 +72,19 @@ def run(host, port):
             else:
                 continue
 
-    mySocket.send(LINE_SEPARATOR)
-    print "Interrupted connection."
-    mySocket.close()
+    try:
+        mySocket.send(LINE_SEPARATOR)
+        print "Interrupted connection."
+        mySocket.close()
+    except socket.error as e:
+        print "error rised: " + str(e)
+
     print("close "+str(host)+':'+str(port))
 
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
     for k, d in all_data.iteritems():
-        with open('output/'+k, 'w') as fd:
+        with open(OUTPUT_DIR+k, 'w') as fd:
             fd.writelines([str(x)+'\n' for x in d])
 
 
