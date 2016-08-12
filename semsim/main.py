@@ -16,7 +16,7 @@ class SimulationParser(argparse.ArgumentParser):
     def __init__(self):
         super(SimulationParser, self).__init__()
 
-        self.add_argument('files', nargs='*', type=file,
+        self.add_argument('files', nargs='*',
                           help='The list of the file to process. Each file will be managed by its own process and Gridsim simulator.')
         self.add_argument('--port', '-p', type=int, default=10600, help='The listen port. Default 10600.')
         self.add_argument('--version', '-V', action='version', version='The simulation use Gridsim v%s\n'
@@ -45,6 +45,7 @@ class Runner(object):
 
         self._is_ready = False
         self._constructed = False
+        self._connection = None
 
         # Process the arguments from argv
 
@@ -69,19 +70,22 @@ class Runner(object):
             # Wait for a connection
             print 'Waiting for a connection...'
             self._connection, client_address = self._socket.accept()
+            self._connection.setblocking(0)
             # A client is connected
             print 'client ' + str(client_address) + ' connected.'
         except socket.error as se:
             print se
+            return
 
         # Define files to read
         files = []
         if args.file:  # if the -f arg is used
             # Give a list of files. One file per line
             # Parse the given file to find the simulation files to load
-            for s in args.files[0]:
-                s = s.rstrip()
-                files.append(s)
+            with open(args.files[0]) as allfiles:
+                for s in allfiles:
+                    s = s.rstrip()
+                    files.append(s)
         else:  # if -f is not used
             # The simulation files are directly given
             files = args.files
@@ -89,7 +93,7 @@ class Runner(object):
         # Launch each simulation in its own thread
         for arg in files:
             parent_conn, child_conn = multiprocessing.Pipe()
-            process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, args.step))
+            process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, args.step, args.day))
             self._processes[process] = parent_conn
             process.start()
 
@@ -162,7 +166,10 @@ class Runner(object):
                             c.send(one_data)
                 else:
                     # Receive data from socket and forward to the simulators
-                    self._recv_data += self._connection.recv(4096)
+                    try:
+                        self._recv_data += self._connection.recv(4096)
+                    except:
+                        continue
         else:
             print "simulation is not ready"
 

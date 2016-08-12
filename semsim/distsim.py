@@ -1,3 +1,4 @@
+import time
 import json
 import ConfigParser
 
@@ -8,7 +9,7 @@ from gridsim.simulation import Simulator
 from gridsim.electrical.loadflow import DirectLoadFlowCalculator
 
 
-def run(arg_file, connection, second):
+def run(arg_file, connection, second, end):
 
     print "Loading file "+arg_file
 
@@ -21,7 +22,7 @@ def run(arg_file, connection, second):
         simulator = Simulator()
         simulator.electrical.load_flow_calculator = DirectLoadFlowCalculator()  # TODO set to None
 
-        decoder = ScenarioDecoder(simulator, connection)
+        decoder = ScenarioDecoder(simulator, connection, units.convert(end, units.day))
         decoder.decode(json.load(json_file))
 
     if simulator is not None and decoder is not None:
@@ -37,6 +38,7 @@ def run(arg_file, connection, second):
 
         is_running = True
         while is_running:
+            time.sleep(0.05)
             while connection.poll():
                 data = connection.recv()
                 if data == config_parser.get('Type', 'step'):

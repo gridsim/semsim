@@ -34,7 +34,7 @@ class ScenarioDecoder(object):
     ATTACH_KEY = u"attach"
     RECORD = u"record"
 
-    def __init__(self, simulator, connection):
+    def __init__(self, simulator, connection, days):
         super(ScenarioDecoder, self).__init__()
 
         self._name = ""
@@ -42,6 +42,7 @@ class ScenarioDecoder(object):
         self._simulator = simulator
         self._devices = list()
         self._time_series = dict()
+        self._days_of_simulation = days
 
         self._connection = connection
 
@@ -256,7 +257,7 @@ class ScenarioDecoder(object):
             reader = self.decode_class(d["reader"], "gridsim.iodata.input")
             stream = self.decode_string(d["data"])
 
-            self._time_series[name] = clazz(reader(stream))
+            self._time_series[name] = clazz(reader(stream), self._days_of_simulation)
 
     def decode_controllers(self, data):
 
