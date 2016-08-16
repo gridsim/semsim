@@ -170,20 +170,22 @@ class ScenarioDecoder(object):
     def decode_buses(self, data):
 
         for d in data:
+            try:
+                modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
 
-            modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
+                clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
 
-            clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
+                name = self.decode_string(d[ScenarioDecoder.PARAMETERS_KEY][ScenarioDecoder.NAME_KEY])
 
-            name = self.decode_string(d[ScenarioDecoder.PARAMETERS_KEY][ScenarioDecoder.NAME_KEY])
+                obj = clazz(name)
+                self._simulator.electrical.add(obj)
 
-            obj = clazz(name)
-            self._simulator.electrical.add(obj)
-
-            if ScenarioDecoder.RECORD in d:
-                for record in d[ScenarioDecoder.RECORD]:
-                    rec = ForwardRecorder(self._connection, str(record))
-                    self._simulator.record(rec, obj)
+                if ScenarioDecoder.RECORD in d:
+                    for record in d[ScenarioDecoder.RECORD]:
+                        rec = ForwardRecorder(self._connection, str(record))
+                        self._simulator.record(rec, obj)
+            except RuntimeError as re:
+                print re
 
     def decode_attach(self, data):
 
@@ -223,22 +225,24 @@ class ScenarioDecoder(object):
     def decode_thermal_devices(self, data):
 
         for d in data:
+            try:
+                modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
 
-            modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
+                clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
 
-            clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
+                params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
 
-            params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
+                obj = clazz(**params)
 
-            obj = clazz(**params)
+                self._simulator.thermal.add(obj)
+                self._devices.append(obj)
 
-            self._simulator.thermal.add(obj)
-            self._devices.append(obj)
-
-            if ScenarioDecoder.RECORD in d:
-                for record in d[ScenarioDecoder.RECORD]:
-                    rec = ForwardRecorder(self._connection, str(record))
-                    self._simulator.record(rec, obj)
+                if ScenarioDecoder.RECORD in d:
+                    for record in d[ScenarioDecoder.RECORD]:
+                        rec = ForwardRecorder(self._connection, str(record))
+                        self._simulator.record(rec, obj)
+            except RuntimeError as re:
+                print re
 
     def decode_thermal(self, data):
 
@@ -262,15 +266,17 @@ class ScenarioDecoder(object):
     def decode_controllers(self, data):
 
         for d in data[ScenarioDecoder.CONTROLLERS_KEY]:
+            try:
+                modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
 
-            modul = self.decode_module(d[ScenarioDecoder.IMPORT_KEY])
+                clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
 
-            clazz = self.decode_class(d[ScenarioDecoder.CLASS_KEY], modul)
+                params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
 
-            params = self.decode_params(d[ScenarioDecoder.PARAMETERS_KEY])
-
-            controller = self._simulator.controller.add(clazz(**params))
-            # self._network.controllers.append(controller)
+                controller = self._simulator.controller.add(clazz(**params))
+                # self._network.controllers.append(controller)
+            except RuntimeError as re:
+                print re
 
     def decode(self, data):
 

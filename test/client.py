@@ -38,7 +38,7 @@ def run(host, port):
                 reception = reception.replace("'", '"')
                 # print reception
 
-                listrcv= json.loads(reception)
+                listrcv = json.loads(reception)
 
                 if 'VALUE' in listrcv:
                     list_value = listrcv['VALUE']
@@ -53,7 +53,7 @@ def run(host, port):
                         print "time: "+str(time)
                         current_time = time
 
-                        if time > 86400:  # day
+                        if time > 86400/24:  # day
                             finished = True
                             break
                         else:

@@ -1,7 +1,6 @@
 import os
 import sys
 import multiprocessing
-import time
 import socket
 import ConfigParser
 import argparse
@@ -9,7 +8,6 @@ import argparse
 import distsim
 
 from gridsim import __version__
-from gridsim.decorators import timed
 
 
 class SimulationParser(argparse.ArgumentParser):
@@ -30,6 +28,7 @@ class SimulationParser(argparse.ArgumentParser):
                           help='Define the number of day of the simulation. Default 1 day.')
         self.add_argument('--step', '-s', type=int, default=60,
                           help='Define the number of second of a time step simulation. Default 60 seconds.')
+        self.add_argument('--core', '-c', type=int, default=8, help='Define the number of core used by the simulation. Default 8.')
 
 
 class Runner(object):
@@ -57,6 +56,15 @@ class Runner(object):
         # Store the list of process [process: connection] to communicate with the process
         self._processes = {}
 
+        # Initialise a new buffer to store messages from sub-processes
+        self._message_buffer = []
+        # Initialise a new buffer to store data from client
+        self._recv_data = self.LINE_SEPARATOR
+
+    def __enter__(self):
+        return self
+
+    def start(self, args=sys.argv):
         try:
             # Create a TCP/IP socket
             self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -90,22 +98,26 @@ class Runner(object):
             # The simulation files are directly given
             files = args.files
 
-        # Launch each simulation in its own thread
-        for arg in files:
-            parent_conn, child_conn = multiprocessing.Pipe()
-            process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, args.step, args.day))
-            self._processes[process] = parent_conn
-            process.start()
+        # separate the files depending on the number of core used
+        file_list = []
+        for i in xrange(args.core):
+            file_list.append([])
 
-        # Initialise a new buffer to store messages from sub-processes
-        self._message_buffer = []
-        # Initialise a new buffer to store data from client
-        self._recv_data = self.LINE_SEPARATOR
+        file_list_pos = 0
+        for f in files:
+            file_list[file_list_pos % args.core].append(f)
+            file_list_pos += 1
+
+        # Launch each simulation in its own thread
+        for arg in file_list:
+            if arg:
+                parent_conn, child_conn = multiprocessing.Pipe()
+                process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, args.step, args.day))
+                self._processes[process] = parent_conn
+                process.start()
 
         print "end of construction"
         self._constructed = True
-
-    def init(self):
 
         if self._constructed:
 
@@ -173,7 +185,7 @@ class Runner(object):
         else:
             print "simulation is not ready"
 
-    def close(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
         for p in self._processes.keys():
             c = self._processes[p]
             c.send(self._config_parser.get(Runner.TYPE, Runner.STOP))
@@ -189,10 +201,16 @@ class Runner(object):
                 # Remove the process from the list
                 del self._processes[p]
 
+        if exc_val is not None:
+            print exc_val
+
         print "End of simulations"
 
 
 if __name__ == '__main__':
+
+    import resource
+    resource.getrlimit(resource.RLIMIT_NOFILE)
 
     # Add the folder where this file is to the path
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -206,13 +224,7 @@ if __name__ == '__main__':
         simulation_parser.exit()
     args = simulation_parser.parse_args()
 
-    runner = Runner(args)
-
-    try:
-        runner.init()
+    with Runner() as runner:
+        runner.start(args)
 
         runner.run()
-    except socket.error as se:
-        print se
-    finally:
-        runner.close()
