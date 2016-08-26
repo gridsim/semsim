@@ -16,7 +16,6 @@ def run(arg_files, connection, second, end):
     config_parser.read('exchange.cfg')
 
     simulator = Simulator()
-    simulator.electrical.load_flow_calculator = DirectLoadFlowCalculator()  # TODO set to None
 
     for arg_file in arg_files:
 
