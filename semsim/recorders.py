@@ -7,19 +7,19 @@ from gridsim.iodata.output import AttributesGetter
 
 class ForwardRecorder(Recorder):
 
-    def __init__(self, connection, attribute_name, x_unit=None, y_unit=None):
+    def __init__(self, sender, attribute_name, x_unit=None, y_unit=None):
         super(ForwardRecorder, self).__init__(attribute_name, x_unit, y_unit)
 
-        self.connection = connection
+        self.sender = sender
 
     def on_simulation_reset(self, subjects):
-        self.connection.send(json.dumps({"RESET": [self._attribute_name, subjects]}))
+        self.sender.put(json.dumps({"RESET": [self._attribute_name, subjects]}))
 
     def on_simulation_step(self, time):
-        self.connection.send(json.dumps({"STEP": [self._attribute_name, time]}))
+        self.sender.put(json.dumps({"STEP": [self._attribute_name, time]}))
 
     def on_observed_value(self, subject, time, value):
-        self.connection.send(json.dumps({"VALUE": [subject, self._attribute_name, time, value]}))
+        self.sender.put(json.dumps({"VALUE": [subject, self._attribute_name, time, value]}))
 
 
 class SumRecorder(Recorder, AttributesGetter):

@@ -81,8 +81,7 @@ class Runner(object):
             self._connection.setblocking(0)
             # A client is connected
             print 'client ' + str(client_address) + ' connected.'
-        except socket.error as se:
-            print se
+        except :
             return
 
         # Define files to read
@@ -111,9 +110,10 @@ class Runner(object):
         # Launch each simulation in its own thread
         for arg in file_list:
             if arg:
-                parent_conn, child_conn = multiprocessing.Pipe()
-                process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, args.step, args.day))
-                self._processes[process] = parent_conn
+                parent_conn = multiprocessing.Queue()
+                child_conn = multiprocessing.Queue()
+                process = multiprocessing.Process(target=distsim.run, args=(arg, child_conn, parent_conn, args.step, args.day))
+                self._processes[process] = {"send": parent_conn, "recv": child_conn}
                 process.start()
 
         print "end of construction"
@@ -126,9 +126,9 @@ class Runner(object):
             while not counter == len(self._processes.keys()):
                 for p in self._processes.keys():
                     # Retrieve the connection associated to the current process
-                    c = self._processes[p]
-                    while c.poll():  # While the connection has data
-                        message = c.recv()
+                    q = self._processes[p]["recv"]
+                    while not q.empty():  # While the connection has data
+                        message = q.get()
                         if message == self._config_parser.get(Runner.TYPE, Runner.LOAD):
                                 counter += 1
                         else:
@@ -152,9 +152,9 @@ class Runner(object):
                 for p in self._processes.keys():
                     if p.is_alive():  # If the process is alive
                         # Retrieve the connection associated to the current process
-                        c = self._processes[p]
-                        while c.poll():  # While the connection has data
-                            self._message_buffer.append(c.recv())
+                        q = self._processes[p]["recv"]
+                        while not q.empty():  # While the connection has data
+                            self._message_buffer.append(q.get())
                     else:  # If the process is finished
                         # Close properly the connection
                         self._processes[p].close()
@@ -174,8 +174,8 @@ class Runner(object):
                     if one_data:
                         # Send it to all the sub-processes
                         for p in self._processes.keys():
-                            c = self._processes[p]
-                            c.send(one_data)
+                            q = self._processes[p]["send"]
+                            q.put(one_data)
                 else:
                     # Receive data from socket and forward to the simulators
                     try:
@@ -186,6 +186,7 @@ class Runner(object):
             print "simulation is not ready"
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        print('Exit')
         for p in self._processes.keys():
             c = self._processes[p]
             c.send(self._config_parser.get(Runner.TYPE, Runner.STOP))
