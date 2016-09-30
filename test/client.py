@@ -16,6 +16,31 @@ def run(host, port):
 
     data_buffer = ""
 
+    hlist = []
+
+    with open("10000.lst", 'r') as f:
+        for line in f:
+            end = line.rfind('.')
+            begin = line.rfind('-')
+            hlist.append(int(line[begin + 1:end]))
+
+    print hlist
+
+    data_true = ''
+    for i in hlist:
+        data_true += 'thermostat_%06d True' % i
+        data_true += LINE_SEPARATOR
+        data_true += 'thermostat_boiler_%06d True' % i
+        data_true += LINE_SEPARATOR
+
+    data_false = ''
+    for i in hlist:
+        data_false += 'thermostat_%06d False' % i
+        data_false += LINE_SEPARATOR
+        data_false += 'thermostat_boiler_%06d False' % i
+        data_false += LINE_SEPARATOR
+    current_break = False
+
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
@@ -53,14 +78,19 @@ def run(host, port):
                         print "time: "+str(time)
                         current_time = time
 
-                        if time > 86400/24:  # day
+                        if time > 86400:  # day
                             finished = True
                             break
                         else:
-                            on_off = bool(random.getrandbits(1))
-                            # print on_off
-                            data = 'nothing %s' % str(on_off)
-                            data += LINE_SEPARATOR
+                            data = ''
+                            if time > 8*3600 and time < 15*3600:
+                                if not current_break:
+                                    data += data_false
+                                    current_break = True
+                            else:
+                                if current_break:
+                                    data += data_true
+                                    current_break = False
                             data += 'STEP'
                             data += LINE_SEPARATOR
                             mySocket.send(data)
