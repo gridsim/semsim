@@ -157,7 +157,7 @@ class Runner(object):
                             self._message_buffer.append(q.get())
                     else:  # If the process is finished
                         # Close properly the connection
-                        self._processes[p].close()
+                        self._processes[p]["recv"].close()
                         # Remove the process from the list
                         del self._processes[p]
 
@@ -188,8 +188,8 @@ class Runner(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
         print('Exit')
         for p in self._processes.keys():
-            c = self._processes[p]
-            c.send(self._config_parser.get(Runner.TYPE, Runner.STOP))
+            c = self._processes[p]['send']
+            c.put(self._config_parser.get(Runner.TYPE, Runner.STOP))
 
         if self._connection is not None:
             self._connection.close()
@@ -198,7 +198,7 @@ class Runner(object):
         for p in self._processes.keys():
             if not p.is_alive():
                 # Close properly the connection
-                self._processes[p].close()
+                self._processes[p]['send'].close()
                 # Remove the process from the list
                 del self._processes[p]
 
