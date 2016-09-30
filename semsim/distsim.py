@@ -49,7 +49,8 @@ def run(arg_files, sender, recver, second, end):
                     data_list = data.split()
                     controllers = simulator.find(friendly_name=data_list[0])
                     for controller in controllers:
-                        controller.influence(data_list[1])
+                        if hasattr(controller, 'influence'):
+                            controller.influence(data_list[1])
 
         print("End of simulation of "+str(arg_files))
     else:
